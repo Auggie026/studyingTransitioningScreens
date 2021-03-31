@@ -9,7 +9,8 @@ import kotlinx.android.synthetic.main.activity_league.*
 
 class LeagueActivity : BaseActivity() {
 
-    var selectedLeague = ""
+
+    var player = Player("", "")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,9 +22,9 @@ class LeagueActivity : BaseActivity() {
         coedLeagueBtn.isChecked = false
 
         if (true.also { this.mensLeagueBtn.isChecked = true }){
-            selectedLeague = "mens"
+           player.league = "mens"
         } else {
-            selectedLeague = ""
+            player.league = ""
         }
 
     }
@@ -33,9 +34,9 @@ class LeagueActivity : BaseActivity() {
         coedLeagueBtn.isChecked = false
 
         if(true.also { it.also { this.womensLeagueBtn.isChecked = true } }){
-            selectedLeague = "womens"
+            player.league = "womens"
         } else {
-            selectedLeague = ""
+            player.league = ""
         }
 
 
@@ -46,18 +47,18 @@ class LeagueActivity : BaseActivity() {
         womensLeagueBtn.isChecked = false
 
         if (true.also { this.coedLeagueBtn.isChecked = true }) {
-            selectedLeague = "co-ed"
+            player.league = "co-ed"
         } else {
-            selectedLeague = ""
+            player.league = ""
         }
 
 
     }
 
     fun leagueNextClicked(view: View){
-        if(selectedLeague != ""){
+        if(player.league != ""){
             val skillActivity = Intent(this, SkillActivity::class.java)
-            skillActivity.putExtra(EXTRA_LEAGUE, selectedLeague)
+            skillActivity.putExtra(EXTRA_LEAGUE, player.league)
             startActivity(skillActivity)
         } else {
             Toast.makeText(this, "Please select a league.", Toast.LENGTH_SHORT).show()

@@ -9,21 +9,20 @@ import kotlinx.android.synthetic.main.activity_skill.*
 
 class SkillActivity : BaseActivity() {
 
-    var league = ""
-    var skill = ""
+    var player = Player("", "")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_skill)
-        league = intent.getStringExtra(EXTRA_LEAGUE).toString()
-        println(league)
+        player.league = intent.getStringExtra(EXTRA_LEAGUE).toString()
+        println(player.league)
     }
 
     fun onBallerClick(view: View){
         beginnerSkillBtn.isChecked = false
         if(true.also { ballerSkillBtn.isChecked = true }){
-            skill = "baller"
+            player.skill = "baller"
         } else {
-            skill = ""
+            player.skill = ""
         }
 
     }
@@ -31,18 +30,18 @@ class SkillActivity : BaseActivity() {
     fun onBeginnerClick(view: View){
         ballerSkillBtn.isChecked = false
         if(true.also{beginnerSkillBtn.isChecked = true}){
-            skill = "beginner"
+            player.skill = "beginner"
         } else {
-            skill = ""
+            player.skill = ""
         }
 
     }
 
     fun onSkillFinishClicked(view: View){
-        if(skill != ""){
+        if(player.skill != ""){
             val finishActivity = Intent(this, FinishActivity::class.java)
-            finishActivity.putExtra(EXTRA_LEAGUE, league)
-            finishActivity.putExtra(EXTRA_SKILL, skill)
+            finishActivity.putExtra(EXTRA_LEAGUE, player.league)
+            finishActivity.putExtra(EXTRA_SKILL, player.skill)
             startActivity(finishActivity)
         } else {
             Toast.makeText(this, "Please select a skill level", Toast.LENGTH_SHORT).show()
